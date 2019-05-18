@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/vue.min.js"></script>
+<script src="~/Scripts/vue-resource.min.js"></script>
+
+<style>
+    td{
+        padding:10px;
+    }
+</style>
+<h2>Index</h2>
+<div id="app">
+    <p>{{msg}}</p>
+    <ul>
+        <li v-for="item in list">{{item}}</li>
+    </ul>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Sex</td>
+        </tr>
+        <tr v-for="item in list1">
+            <td>{{item.ID}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Sex}}</td>
+        </tr>
+    </table>
+    <input type="button" value="GetInfo" v-on:click="getInfo" />
+
+    <input type="button" value="PostInfo" v-on:click="postInfo" />
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                list: '',
+                list1: '',
+                msg: 'Bad'
+            }
+        },
+        methods: {
+            getInfo() {
+                this.$http.get('/Index/Index1')
+                    .then(result => {
+                        this.list = result.body;
+                    })
+            },
+            postInfo() {
+                this.$http.post('/Index/Index2', true).then(result => {
+                    this.list1 = result.body;
+                })
+            }
+        }
+    })
+</script>
