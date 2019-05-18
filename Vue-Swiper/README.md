@@ -1,4 +1,4 @@
-# vue01
+# Vue-Swiper
 
 > A Vue.js project
 
